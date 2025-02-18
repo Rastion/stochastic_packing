@@ -34,13 +34,13 @@ class StochasticPackingProblem(BaseProblem):
       Each bin is a list of item indices.
       Every item must appear in exactly one bin.
     """
-    def __init__(self, instance_file=None):
+    def __init__(self, nb_items, nb_bins, nb_scenarios, rng_seed):
         # Instead of reading an instance file, we use default parameters.
         # These parameters can be overridden via the override_params mechanism.
-        self.nb_items = 10
-        self.nb_bins = 2
-        self.nb_scenarios = 3
-        self.rng_seed = 42
+        self.nb_items = nb_items
+        self.nb_bins = nb_bins
+        self.nb_scenarios = nb_scenarios
+        self.rng_seed = rng_seed
         # Generate the scenario data: a list (over scenarios) of lists (item weights)
         self.scenario_item_weights_data = generate_scenarios(
             self.nb_items, self.nb_scenarios, self.rng_seed
