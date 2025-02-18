@@ -1,0 +1,43 @@
+{
+    "entry_point": "stochastic_packing_problem:StochasticPackingProblem",
+    "default_params": {
+      "nb_items": 10,
+      "nb_bins": 2,
+      "nb_scenarios": 3,
+      "rng_seed": 42
+    },
+    "problem_type": "Stochastic Packing",
+    "description": "In the stochastic packing problem, items with random weights (sampled over several scenarios) must be partitioned into bins. For each scenario, the weight of a bin is computed as the sum of the weights of the items assigned to it. The objective is to minimize the 90th percentile (9th decile) of the maximum bin weight over all scenarios, thus building a robust solution that avoids risky scenarios without being overly pessimistic.",
+    "keywords": [
+      "stochastic",
+      "packing",
+      "bin packing",
+      "robust optimization",
+      "scenario-based"
+    ],
+    "data_format": {
+      "instance_file": {
+        "format": "Instances are generated at runtime using default parameters: nb_items, nb_bins, nb_scenarios, and rng_seed."
+      }
+    },
+    "decision_variables": {
+      "bins": {
+        "type": "list of lists of int",
+        "description": "A partition of the items (indices 0 to nb_items-1) into bins. Each inner list represents the items assigned to a bin."
+      }
+    },
+    "objective": {
+      "type": "minimization",
+      "function": "90th percentile of scenario maximum bin weights",
+      "description": "Minimize the 9th decile (90th percentile) of the maximum bin weight over all scenarios, where each scenario provides a different realization of item weights."
+    },
+    "solution_representation": "A list of bins, each bin being a list of item indices.",
+    "compatible_optimizers": [
+      "genetic_algorithm",
+      "simulated_annealing",
+      "particle_swarm",
+      "tabu_search",
+      "rl_optimizer"
+    ]
+  }
+  
